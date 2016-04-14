@@ -487,3 +487,5 @@ ReactComponent.Mixin.updateAll = function(props) {
 };
 
 module.exports = ReactComponent;
+
+console.log("Hello");

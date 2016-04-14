@@ -88,14 +88,14 @@ var EVENT_LISTEN_MISUSE;
 var WORKER_DISABLE;
 
 if (__DEV__) {
-  EVENT_LISTEN_MISUSE =
-    'You must register listeners at the top of the document, only once - ' +
-    'and only in the main UI thread of a browser - if you are attempting ' +
-    'listen in a worker, the framework is probably doing something wrong ' +
-    'and you should report this immediately.';
-  WORKER_DISABLE =
-    'Cannot disable event listening in Worker thread. This is likely a ' +
-    'bug in the framework. Please report immediately.';
+	EVENT_LISTEN_MISUSE =
+		'You must register listeners at the top of the document, only once - ' +
+		'and only in the main UI thread of a browser - if you are attempting ' +
+		'listen in a worker, the framework is probably doing something wrong ' +
+		'and you should report this immediately.';
+	WORKER_DISABLE =
+		'Cannot disable event listening in Worker thread. This is likely a ' +
+		'bug in the framework. Please report immediately.';
 }
 
 
@@ -105,22 +105,22 @@ if (__DEV__) {
  * `TopLevelCallbackCreator.createTopLevelCallback`.
  */
 function trapBubbledEvent(topLevelType, handlerBaseName, onWhat) {
-  listen(
-    onWhat,
-    handlerBaseName,
-    ReactEvent.TopLevelCallbackCreator.createTopLevelCallback(topLevelType)
-  );
+	listen(
+		onWhat,
+		handlerBaseName,
+		ReactEvent.TopLevelCallbackCreator.createTopLevelCallback(topLevelType)
+	);
 }
 
 /**
  * Traps a top-level event by using event capturing.
  */
 function trapCapturedEvent(topLevelType, handlerBaseName, onWhat) {
-  capture(
-    onWhat,
-    handlerBaseName,
-    ReactEvent.TopLevelCallbackCreator.createTopLevelCallback(topLevelType)
-  );
+	capture(
+		onWhat,
+		handlerBaseName,
+		ReactEvent.TopLevelCallbackCreator.createTopLevelCallback(topLevelType)
+	);
 }
 
 /**
@@ -130,19 +130,19 @@ function trapCapturedEvent(topLevelType, handlerBaseName, onWhat) {
  * reflows.
  */
 function registerDocumentScrollListener() {
-  listen(window, 'scroll', function(nativeEvent) {
-    if (nativeEvent.target === window) {
-      BrowserEnv.refreshAuthoritativeScrollValues();
-    }
-  });
+	listen(window, 'scroll', function(nativeEvent) {
+		if (nativeEvent.target === window) {
+			BrowserEnv.refreshAuthoritativeScrollValues();
+		}
+	});
 }
 
 function registerDocumentResizeListener() {
-  listen(window, 'resize', function(nativeEvent) {
-    if (nativeEvent.target === window) {
-      BrowserEnv.refreshAuthoritativeScrollValues();
-    }
-  });
+	listen(window, 'resize', function(nativeEvent) {
+		if (nativeEvent.target === window) {
+			BrowserEnv.refreshAuthoritativeScrollValues();
+		}
+	});
 }
 
 /**
@@ -172,57 +172,57 @@ function registerDocumentResizeListener() {
  * @private
  */
 function listenAtTopLevel(touchNotMouse) {
-  invariant(
-    !_isListening,
-    'listenAtTopLevel(...): Cannot setup top-level listener more than once.'
-  );
-  var mountAt = document;
+	invariant(
+		!_isListening,
+		'listenAtTopLevel(...): Cannot setup top-level listener more than once.'
+	);
+	var mountAt = document;
 
-  registerDocumentScrollListener();
-  registerDocumentResizeListener();
-  trapBubbledEvent(topLevelTypes.topMouseOver, 'mouseover', mountAt);
-  trapBubbledEvent(topLevelTypes.topMouseDown, 'mousedown', mountAt);
-  trapBubbledEvent(topLevelTypes.topMouseUp, 'mouseup', mountAt);
-  trapBubbledEvent(topLevelTypes.topMouseMove, 'mousemove', mountAt);
-  trapBubbledEvent(topLevelTypes.topMouseOut, 'mouseout', mountAt);
-  trapBubbledEvent(topLevelTypes.topClick, 'click', mountAt);
-  trapBubbledEvent(topLevelTypes.topDoubleClick, 'dblclick', mountAt);
-  trapBubbledEvent(topLevelTypes.topMouseWheel, 'mousewheel', mountAt);
-  if (touchNotMouse) {
-    trapBubbledEvent(topLevelTypes.topTouchStart, 'touchstart', mountAt);
-    trapBubbledEvent(topLevelTypes.topTouchEnd, 'touchend', mountAt);
-    trapBubbledEvent(topLevelTypes.topTouchMove, 'touchmove', mountAt);
-    trapBubbledEvent(topLevelTypes.topTouchCancel, 'touchcancel', mountAt);
-  }
-  trapBubbledEvent(topLevelTypes.topKeyUp, 'keyup', mountAt);
-  trapBubbledEvent(topLevelTypes.topKeyPress, 'keypress', mountAt);
-  trapBubbledEvent(topLevelTypes.topKeyDown, 'keydown', mountAt);
-  trapBubbledEvent(topLevelTypes.topChange, 'change', mountAt);
-  trapBubbledEvent(
-    topLevelTypes.topDOMCharacterDataModified,
-    'DOMCharacterDataModified',
-    mountAt
-  );
+	registerDocumentScrollListener();
+	registerDocumentResizeListener();
+	trapBubbledEvent(topLevelTypes.topMouseOver, 'mouseover', mountAt);
+	trapBubbledEvent(topLevelTypes.topMouseDown, 'mousedown', mountAt);
+	trapBubbledEvent(topLevelTypes.topMouseUp, 'mouseup', mountAt);
+	trapBubbledEvent(topLevelTypes.topMouseMove, 'mousemove', mountAt);
+	trapBubbledEvent(topLevelTypes.topMouseOut, 'mouseout', mountAt);
+	trapBubbledEvent(topLevelTypes.topClick, 'click', mountAt);
+	trapBubbledEvent(topLevelTypes.topDoubleClick, 'dblclick', mountAt);
+	trapBubbledEvent(topLevelTypes.topMouseWheel, 'mousewheel', mountAt);
+	if (touchNotMouse) {
+		trapBubbledEvent(topLevelTypes.topTouchStart, 'touchstart', mountAt);
+		trapBubbledEvent(topLevelTypes.topTouchEnd, 'touchend', mountAt);
+		trapBubbledEvent(topLevelTypes.topTouchMove, 'touchmove', mountAt);
+		trapBubbledEvent(topLevelTypes.topTouchCancel, 'touchcancel', mountAt);
+	}
+	trapBubbledEvent(topLevelTypes.topKeyUp, 'keyup', mountAt);
+	trapBubbledEvent(topLevelTypes.topKeyPress, 'keypress', mountAt);
+	trapBubbledEvent(topLevelTypes.topKeyDown, 'keydown', mountAt);
+	trapBubbledEvent(topLevelTypes.topChange, 'change', mountAt);
+	trapBubbledEvent(
+		topLevelTypes.topDOMCharacterDataModified,
+		'DOMCharacterDataModified',
+		mountAt
+	);
 
-  // Firefox needs to capture a different mouse scroll event.
-  // @see http://www.quirksmode.org/dom/events/tests/scroll.html
-  trapBubbledEvent(topLevelTypes.topMouseWheel, 'DOMMouseScroll', mountAt);
-  // IE < 9 doesn't support capturing so just trap the bubbled event there.
-  if (isEventSupported('scroll', true)) {
-    trapCapturedEvent(topLevelTypes.topScroll, 'scroll', mountAt);
-  } else {
-    trapBubbledEvent(topLevelTypes.topScroll, 'scroll', window);
-  }
+	// Firefox needs to capture a different mouse scroll event.
+	// @see http://www.quirksmode.org/dom/events/tests/scroll.html
+	trapBubbledEvent(topLevelTypes.topMouseWheel, 'DOMMouseScroll', mountAt);
+	// IE < 9 doesn't support capturing so just trap the bubbled event there.
+	if (isEventSupported('scroll', true)) {
+		trapCapturedEvent(topLevelTypes.topScroll, 'scroll', mountAt);
+	} else {
+		trapBubbledEvent(topLevelTypes.topScroll, 'scroll', window);
+	}
 
-  if (isEventSupported('focus', true)) {
-    trapCapturedEvent(topLevelTypes.topFocus, 'focus', mountAt);
-    trapCapturedEvent(topLevelTypes.topBlur, 'blur', mountAt);
-  } else if (isEventSupported('focusin')) {
-    // IE has `focusin` and `focusout` events which bubble.
-    // @see http://www.quirksmode.org/blog/archives/2008/04/delegating_the.html
-    trapBubbledEvent(topLevelTypes.topFocus, 'focusin', mountAt);
-    trapBubbledEvent(topLevelTypes.topBlur, 'focusout', mountAt);
-  }
+	if (isEventSupported('focus', true)) {
+		trapCapturedEvent(topLevelTypes.topFocus, 'focus', mountAt);
+		trapCapturedEvent(topLevelTypes.topBlur, 'blur', mountAt);
+	} else if (isEventSupported('focusin')) {
+		// IE has `focusin` and `focusout` events which bubble.
+		// @see http://www.quirksmode.org/blog/archives/2008/04/delegating_the.html
+		trapBubbledEvent(topLevelTypes.topFocus, 'focusin', mountAt);
+		trapBubbledEvent(topLevelTypes.topBlur, 'focusout', mountAt);
+	}
 }
 
 /**
@@ -236,33 +236,33 @@ function listenAtTopLevel(touchNotMouse) {
  * @internal
  */
 function handleTopLevel(
-    topLevelType,
-    nativeEvent,
-    renderedTargetID,
-    renderedTarget) {
-  var abstractEvents = EventPluginHub.extractAbstractEvents(
-    topLevelType,
-    nativeEvent,
-    renderedTargetID,
-    renderedTarget
-  );
+		topLevelType,
+		nativeEvent,
+		renderedTargetID,
+		renderedTarget) {
+	var abstractEvents = EventPluginHub.extractAbstractEvents(
+		topLevelType,
+		nativeEvent,
+		renderedTargetID,
+		renderedTarget
+	);
 
-  // The event queue being processed in the same cycle allows preventDefault.
-  EventPluginHub.enqueueAbstractEvents(abstractEvents);
-  EventPluginHub.processAbstractEventQueue();
+	// The event queue being processed in the same cycle allows preventDefault.
+	EventPluginHub.enqueueAbstractEvents(abstractEvents);
+	EventPluginHub.processAbstractEventQueue();
 }
 
 function setEnabled(enabled) {
-  invariant(
-    ExecutionEnvironment.canUseDOM,
-    'setEnabled(...): Cannot toggle event listening in a Worker thread. This ' +
-    'is likely a bug in the framework. Please report immediately.'
-  );
-  ReactEvent.TopLevelCallbackCreator.setEnabled(enabled);
+	invariant(
+		ExecutionEnvironment.canUseDOM,
+		'setEnabled(...): Cannot toggle event listening in a Worker thread. This ' +
+		'is likely a bug in the framework. Please report immediately.'
+	);
+	ReactEvent.TopLevelCallbackCreator.setEnabled(enabled);
 }
 
 function isEnabled() {
-  return ReactEvent.TopLevelCallbackCreator.isEnabled();
+	return ReactEvent.TopLevelCallbackCreator.isEnabled();
 }
 
 /**
@@ -278,30 +278,30 @@ function isEnabled() {
  * @internal
  */
 function ensureListening(touchNotMouse, TopLevelCallbackCreator) {
-  invariant(
-    ExecutionEnvironment.canUseDOM,
-    'ensureListening(...): Cannot toggle event listening in a Worker thread. ' +
-    'This is likely a bug in the framework. Please report immediately.'
-  );
-  if (!_isListening) {
-    ReactEvent.TopLevelCallbackCreator = TopLevelCallbackCreator;
-    listenAtTopLevel(touchNotMouse);
-    _isListening = true;
-  }
+	invariant(
+		ExecutionEnvironment.canUseDOM,
+		'ensureListening(...): Cannot toggle event listening in a Worker thread. ' +
+		'This is likely a bug in the framework. Please report immediately.'
+	);
+	if (!_isListening) {
+		ReactEvent.TopLevelCallbackCreator = TopLevelCallbackCreator;
+		listenAtTopLevel(touchNotMouse);
+		_isListening = true;
+	}
 }
 
 var ReactEvent = {
-  TopLevelCallbackCreator: null, // Injectable callback creator.
-  handleTopLevel: handleTopLevel,
-  setEnabled: setEnabled,
-  isEnabled: isEnabled,
-  ensureListening: ensureListening,
-  registrationNames: registrationNames,
-  putListener: EventPluginHub.putListener,
-  getListener: EventPluginHub.getListener,
-  deleteAllListeners: EventPluginHub.deleteAllListeners,
-  trapBubbledEvent: trapBubbledEvent,
-  trapCapturedEvent: trapCapturedEvent
+	TopLevelCallbackCreator: null, // Injectable callback creator.
+	handleTopLevel: handleTopLevel,
+	setEnabled: setEnabled,
+	isEnabled: isEnabled,
+	ensureListening: ensureListening,
+	registrationNames: registrationNames,
+	putListener: EventPluginHub.putListener,
+	getListener: EventPluginHub.getListener,
+	deleteAllListeners: EventPluginHub.deleteAllListeners,
+	trapBubbledEvent: trapBubbledEvent,
+	trapCapturedEvent: trapCapturedEvent
 };
 
 module.exports = ReactEvent;
